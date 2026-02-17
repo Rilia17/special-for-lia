@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khusus Untuk Ayang Lia ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        :root {
+            --primary: #ff4d6d;
+            --secondary: #ffb3c1;
+            --glass: rgba(0, 0, 0, 0.85);
+            --text: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #000;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+            color: var(--text);
+            padding: 40px 0;
+        }
+
+        #bg-static {
+            position: fixed;
+            inset: 0;
+            background: url('with my fav person (4).png') center/cover no-repeat;
+            z-index: -1;
+            filter: brightness(0.4) blur(5px);
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 35px 25px;
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: auto;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.8rem;
+            color: var(--secondary);
+            text-shadow: 0 0 15px rgba(255, 179, 193, 0.5);
+        }
+
+        .video-wrapper, .img-wrapper {
+            width: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+            display: none;
+            background: #000;
+            margin-bottom: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        video, .img-wrapper img {
+            width: 100%;
+            display: block;
+        }
+
+        #type-wrap {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            min-height: 80px;
+            font-weight: 300;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            min-height: 50px;
+        }
+
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .btn-main { background: var(--primary); color: white; box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4); }
+        .btn-alt { background: white; color: var(--primary); }
+
+        #form-area {
+            display: none;
+            flex-direction: column;
+            gap: 12px;
+            animation: fadeIn 0.8s ease;
+        }
+
+        textarea {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 15px;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            resize: none;
+            outline: none;
+        }
+
+        .music-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--glass);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+    <div id="bg-static"></div>
+    <audio id="bgMusic" loop src="backsound.mp3"></audio>
+    <div class="music-toggle" onclick="toggleMusic()">🎵</div>
+
+    <div class="container">
+        <div id="content-box">
+            <h1 id="title">Halo Ayang...</h1>
+            
+            <div class="img-wrapper" id="pic-display">
+                <img id="inner-img" src="">
+            </div>
+
+            <div class="video-wrapper" id="vid-display">
+                <video id="inner-vid" controls playsinline></video>
+            </div>
+
+            <div id="type-wrap">Selama ini aku cuma bisa kasih semangat lewat bot, sekarang aku mau ngomong langsung sama kamu...</div>
+            
+            <div class="btn-group" id="btn-area">
+                <button class="btn-main" onclick="startJourney()">Buka Pesan 💌</button>
+            </div>
+        </div>
+
+        <div id="form-area">
+            <form action="https://formspree.io/f/YOUR_ID_HERE" method="POST" style="display: flex; flex-direction: column; gap: 15px;">
+                <textarea name="pesan_lia" rows="4" placeholder="Tulis jawaban atau pesanmu buat aku di sini ya..." required></textarea>
+                <button type="submit" class="btn-main">Kirim ke Ayang Ridwan 💌</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const slides = [
+            {
+                title: "Liana Sayang...",
+                text: "Ingat gak awal kita ketemu di Sweet Dance? Makasih ya sudah menemani aku dari jaman mabar bareng, di saat aku drop karna masa lalu aku, sampai aku sibuk ngoding kayak sekarang.",
+                type: "img", src: "with my fav person (4).png"
+            },
+            {
+                title: "Tetap Semangat Ya!",
+                text: "Aku tahu kamu capek kerja, Kalau lagi capek, kamu boleh menjadi diri kamu sendiri, kamu boleh menunjukan sisi lemah kamu, jangan terus berusaha menjadi kuat, kamu boleh menjadikan aku rumah untuk kamu pulang, saat kamu sedang merasa lelah akan dunia ini,ingat ada aku yang selalu dukung kamu.",
+                type: "vid", src: "lia_1.mp4"
+            },
+            {
+                title: "Ingat Janjiku...",
+                text: "Aku mau jadi orang yang selalu jagain kamu. Biar kamu nggak perlu takut lagi sama hal-hal kayak ular di kebun atau masalah lainnya di sana.",
+                type: "vid", src: "lia_2.mp4"
+            },
+            {
+                title: "Masa Depan Kita",
+                text: "Aku ingin kita benar-benar membangun rencana besar bersama di dunia nyata. Karena buat aku, kamu adalah rumah tempat aku pulang, dan aku adalah rumah untuk kamu pulang dari hiruk pikuk dunia ini.",
+                type: "vid", src: "lia_3.mp4"
+            },
+            {
+                title: "Liana...",
+                text: "Lia, everything feels better when I'm with you, and I don't want that to change. I want to take this seriously. would you give me the chance to be your boyfriend? dan tetap ada di samping aku untuk waktu yang lama?",
+                type: "img", src: "1771302170128.png"
+            }
+        ];
+
+        let currentSlide = 0;
+        const titleEl = document.getElementById('title');
+        const typeWrap = document.getElementById('type-wrap');
+        const picWrap = document.getElementById('pic-display');
+        const vidWrap = document.getElementById('vid-display');
+        const innerImg = document.getElementById('inner-img');
+        const innerVid = document.getElementById('inner-vid');
+        const music = document.getElementById('bgMusic');
+
+        function toggleMusic() {
+            if (music.paused) { music.play(); document.querySelector('.music-toggle').innerHTML = '🔊'; }
+            else { music.pause(); document.querySelector('.music-toggle').innerHTML = '🎵'; }
+        }
+
+        // Logic volume drop pas video diputar manual
+        innerVid.addEventListener('play', () => { music.volume = 0.2; });
+        innerVid.addEventListener('pause', () => { music.volume = 1.0; });
+        innerVid.addEventListener('ended', () => { music.volume = 1.0; });
+
+        function startJourney() {
+            // Fullscreen Logic
+            const elem = document.documentElement;
+            if (elem.requestFullscreen) { elem.requestFullscreen(); }
+            else if (elem.webkitRequestFullscreen) { elem.webkitRequestFullscreen(); }
+
+            // Audio Logic: Jump to 6s & Fade In
+            music.currentTime = 6;
+            music.volume = 0;
+            music.play();
+            document.querySelector('.music-toggle').innerHTML = '🔊';
+
+            let vol = 0;
+            const fadeIn = setInterval(() => {
+                if (vol < 1) {
+                    vol += 0.05;
+                    if (vol > 1) vol = 1;
+                    music.volume = vol;
+                } else {
+                    clearInterval(fadeIn);
+                }
+            }, 100); // Naik 5% tiap 100ms
+
+            nextSlide();
+        }
+
+        function typeWriter(text, i, cb) {
+            if (i < text.length) {
+                typeWrap.innerHTML = text.substring(0, i + 1);
+                setTimeout(() => typeWriter(text, i + 1, cb), 40);
+            } else if (cb) { cb(); }
+        }
+
+        function updateMedia(slide) {
+            picWrap.style.display = "none";
+            vidWrap.style.display = "none";
+            innerVid.pause();
+
+            if (slide.type === "vid") {
+                innerVid.src = slide.src;
+                vidWrap.style.display = "block";
+            } else {
+                innerImg.src = slide.src;
+                picWrap.style.display = "block";
+            }
+        }
+
+        function nextSlide() {
+            document.getElementById('btn-area').innerHTML = "";
+            const s = slides[currentSlide];
+            titleEl.innerText = s.title;
+            updateMedia(s);
+
+            typeWriter(s.text, 0, () => {
+                if (currentSlide < slides.length - 1) {
+                    currentSlide++;
+                    document.getElementById('btn-area').innerHTML = `<button class="btn-main" onclick="nextSlide()">Lanjut 👉</button>`;
+                } else { showFinalChoice(); }
+            });
+        }
+
+        function showFinalChoice() {
+            document.getElementById('btn-area').innerHTML = `
+                <button class="btn-main" id="btn-yes" onclick="celebrate()">MAU! ❤️</button>
+                <button class="btn-alt" id="btn-no" onmouseover="dodge()">Enggak</button>
+            `;
+        }
+
+        function dodge() {
+            const btn = document.getElementById('btn-no');
+            const maxX = window.innerWidth - btn.offsetWidth;
+            const maxY = window.innerHeight - btn.offsetHeight;
+            btn.style.position = 'fixed';
+            btn.style.left = Math.random() * maxX + 'px';
+            btn.style.top = Math.random() * maxY + 'px';
+            btn.style.zIndex = "999";
+        }
+
+        function celebrate() {
+            music.volume = 1.0;
+            innerVid.pause();
+            document.getElementById('content-box').style.display = "none";
+            
+            const greet = document.createElement('div');
+            greet.innerHTML = `<h1 style="font-size:3.5rem">YEYYY! 🥳❤️</h1><p style="margin:20px 0">Makasih ya Lia! Aku janji bakal kasih yang terbaik buat kamu. I love you!</p><p style="font-size:3rem">💑🌹✨</p>`;
+            document.getElementById('main-container').prepend(greet);
+            document.getElementById('form-area').style.display = "flex";
+
+            const duration = 10 * 1000;
+            const end = Date.now() + duration;
+            (function frame() {
+                confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 } });
+                confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 } });
+                if (Date.now() < end) requestAnimationFrame(frame);
+            }());
+        }
+    </script>
+</body>
+</html>
