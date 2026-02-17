@@ -31,7 +31,7 @@
         #bg-static {
             position: fixed;
             inset: 0;
-            background: url('bg.png') center/cover no-repeat;
+            background: url('bg.png') center/cover no-repeat; /* NAMA FILE SUDAH DISIMPLIKASI */
             z-index: -1;
             filter: brightness(0.4) blur(5px);
         }
@@ -201,7 +201,7 @@
             {
                 title: "Liana...",
                 text: "Lia, everything feels better when I'm with you, and I don't want that to change. I want to take this seriously. would you give me the chance to be your boyfriend? dan tetap ada di samping aku untuk waktu yang lama?",
-                type: "img", src: "1771302170128.png"
+                type: "img", src: "last.png" /* NAMA FILE 1771302170128.png JUGA DISIMPLIKASI JADI last.png */
             }
         ];
 
@@ -219,18 +219,15 @@
             else { music.pause(); document.querySelector('.music-toggle').innerHTML = '🎵'; }
         }
 
-        // Logic volume drop pas video diputar manual
         innerVid.addEventListener('play', () => { music.volume = 0.2; });
         innerVid.addEventListener('pause', () => { music.volume = 1.0; });
         innerVid.addEventListener('ended', () => { music.volume = 1.0; });
 
         function startJourney() {
-            // Fullscreen Logic
             const elem = document.documentElement;
             if (elem.requestFullscreen) { elem.requestFullscreen(); }
             else if (elem.webkitRequestFullscreen) { elem.webkitRequestFullscreen(); }
 
-            // Audio Logic: Jump to 6s & Fade In
             music.currentTime = 6;
             music.volume = 0;
             music.play();
@@ -242,10 +239,8 @@
                     vol += 0.05;
                     if (vol > 1) vol = 1;
                     music.volume = vol;
-                } else {
-                    clearInterval(fadeIn);
-                }
-            }, 100); // Naik 5% tiap 100ms
+                } else { clearInterval(fadeIn); }
+            }, 100);
 
             nextSlide();
         }
@@ -322,5 +317,4 @@
         }
     </script>
 </body>
-
 </html>
