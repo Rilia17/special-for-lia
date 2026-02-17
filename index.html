@@ -24,22 +24,21 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow-x: hidden;
             overflow-y: auto;
             color: var(--text);
             padding: 40px 0;
         }
 
-        /* Static Background Image - CEK NAMA FILE DISINI */
         #bg-static {
             position: fixed;
             inset: 0;
-            background: url('sayang.png') center/cover no-repeat; 
+            background: url('sayang.png') center/cover no-repeat;
             z-index: -1;
             filter: brightness(0.6) blur(5px);
             transition: 1s ease;
         }
 
-        /* UI Container */
         .container {
             position: relative;
             z-index: 10;
@@ -66,7 +65,6 @@
             text-shadow: 0 0 15px rgba(255, 179, 193, 0.5);
         }
 
-        /* Multimedia Display */
         .video-wrapper, .img-wrapper {
             width: 100%;
             border-radius: 15px;
@@ -94,6 +92,7 @@
             justify-content: center;
             gap: 12px;
             min-height: 50px;
+            margin-top: 10px;
         }
 
         button {
@@ -102,25 +101,25 @@
             border-radius: 50px;
             font-weight: 600;
             cursor: pointer;
-            transition: 0.3s;
+            transition: 0.2s;
             font-family: 'Poppins', sans-serif;
             font-size: 0.9rem;
         }
 
         .btn-main { background: var(--primary); color: white; box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4); }
-        .btn-alt { background: white; color: var(--primary); }
+        .btn-alt { background: white; color: var(--primary); border: 1px solid var(--primary); }
 
-        /* Formspree Section */
         #form-area {
             display: none;
             flex-direction: column;
             gap: 12px;
             animation: fadeIn 0.8s ease;
+            width: 100%;
         }
 
         textarea {
             width: 100%;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 15px;
             padding: 15px;
@@ -219,6 +218,7 @@
         const innerImg = document.getElementById('inner-img');
         const innerVid = document.getElementById('inner-vid');
         const music = document.getElementById('bgMusic');
+        const btnArea = document.getElementById('btn-area');
 
         function toggleMusic() {
             if (music.paused) { music.play(); document.querySelector('.music-toggle').innerHTML = '🔊'; }
@@ -273,7 +273,7 @@
         }
 
         function nextSlide() {
-            document.getElementById('btn-area').innerHTML = "";
+            btnArea.innerHTML = "";
             const s = slides[currentSlide];
             titleEl.innerText = s.title;
             updateMedia(s);
@@ -281,38 +281,47 @@
             typeWriter(s.text, 0, () => {
                 if (currentSlide < slides.length - 1) {
                     currentSlide++;
-                    document.getElementById('btn-area').innerHTML = `<button class="btn-main" onclick="nextSlide()">Lanjut 👉</button>`;
+                    btnArea.innerHTML = `<button class="btn-main" onclick="nextSlide()">Lanjut 👉</button>`;
                 } else { showFinalChoice(); }
             });
         }
 
         function showFinalChoice() {
-            document.getElementById('btn-area').innerHTML = `
+            btnArea.innerHTML = `
                 <button class="btn-main" id="btn-yes" onclick="celebrate()">MAU! ❤️</button>
                 <button class="btn-alt" id="btn-no" onmouseover="dodge()">Enggak</button>
             `;
         }
 
         function dodge() {
-            const btn = document.getElementById('btn-no');
-            const maxX = window.innerWidth - btn.offsetWidth;
-            const maxY = window.innerHeight - btn.offsetHeight;
-            btn.style.position = 'fixed';
-            btn.style.left = Math.random() * maxX + 'px';
-            btn.style.top = Math.random() * maxY + 'px';
-            btn.style.zIndex = "999";
+            const btnNo = document.getElementById('btn-no');
+            // Logic lari lebih responsif
+            const maxX = window.innerWidth - btnNo.offsetWidth - 20;
+            const maxY = window.innerHeight - btnNo.offsetHeight - 20;
+            
+            btnNo.style.position = 'fixed';
+            btnNo.style.left = Math.random() * maxX + 'px';
+            btnNo.style.top = Math.random() * maxY + 'px';
+            btnNo.style.zIndex = "9999";
         }
 
         function celebrate() {
             music.volume = 1.0;
             innerVid.pause();
+            
+            // Sembunyiin konten lama dan tombol
             document.getElementById('content-box').style.display = "none";
             
-            const greet = document.createElement('div');
-            greet.innerHTML = `<h1 style="font-size:3.5rem">YEYYY! 🥳❤️</h1><p style="margin:20px 0">Makasih ya Lia! Aku janji bakal kasih yang terbaik buat kamu. I love you!</p><p style="font-size:3rem">💑🌹✨</p>`;
-            document.getElementById('main-container').prepend(greet);
+            // Tampilkan kotak isi pesan
             document.getElementById('form-area').style.display = "flex";
+            
+            // Tambah greeting baru
+            const greet = document.createElement('div');
+            greet.innerHTML = `<h1 style="font-size:3rem">YEYYY! 🥳❤️</h1><p style="margin:15px 0">Makasih ya Lia! Aku janji bakal kasih yang terbaik buat kamu. I love you!</p><p style="font-size:2.5rem">💑🌹✨</p>`;
+            greet.style.textAlign = "center";
+            document.getElementById('main-container').prepend(greet);
 
+            // Party Confetti
             const duration = 10 * 1000;
             const end = Date.now() + duration;
             (function frame() {
