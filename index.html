@@ -10,11 +10,10 @@
         :root {
             --primary: #ff4d6d;
             --secondary: #ffb3c1;
-            --glass: rgba(0, 0, 0, 0.85);
+            --glass: rgba(0, 0, 0, 0.75);
             --text: #ffffff;
         }
 
-        /* RESET & SCROLL FIX */
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
 
         body {
@@ -27,7 +26,7 @@
             overflow-x: hidden;
             overflow-y: auto;
             color: var(--text);
-            padding: 40px 0;
+            padding: 20px 0;
         }
 
         #bg-static {
@@ -35,7 +34,7 @@
             inset: 0;
             background: url('sayang.png') center/cover no-repeat;
             z-index: -1;
-            filter: brightness(0.6) blur(5px);
+            filter: brightness(0.5) blur(3px);
             transition: 1s ease;
         }
 
@@ -43,15 +42,16 @@
             position: relative;
             z-index: 10;
             background: var(--glass);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            /* BORDER DIBUAT SANGAT TRANSPARAN */
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 30px;
-            padding: 35px 25px;
+            padding: 30px 20px;
             text-align: center;
             width: 90%;
             max-width: 400px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
             display: flex;
             flex-direction: column;
             gap: 15px;
@@ -60,9 +60,9 @@
 
         h1 {
             font-family: 'Dancing Script', cursive;
-            font-size: 2.8rem;
+            font-size: 2.6rem;
             color: var(--secondary);
-            text-shadow: 0 0 15px rgba(255, 179, 193, 0.5);
+            text-shadow: 0 0 10px rgba(255, 179, 193, 0.4);
         }
 
         .video-wrapper, .img-wrapper {
@@ -71,8 +71,7 @@
             overflow: hidden;
             display: none;
             background: #000;
-            margin-bottom: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         video, .img-wrapper img {
@@ -90,9 +89,9 @@
         .btn-group {
             display: flex;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             min-height: 50px;
-            margin-top: 10px;
+            position: relative;
         }
 
         button {
@@ -103,10 +102,10 @@
             cursor: pointer;
             transition: 0.2s;
             font-family: 'Poppins', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
-        .btn-main { background: var(--primary); color: white; box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4); }
+        .btn-main { background: var(--primary); color: white; box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3); }
         .btn-alt { background: white; color: var(--primary); border: 1px solid var(--primary); }
 
         #form-area {
@@ -126,23 +125,21 @@
             color: white;
             font-family: 'Poppins', sans-serif;
             resize: none;
-            outline: none;
         }
 
         .music-toggle {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            top: 15px;
+            right: 15px;
             background: var(--glass);
-            width: 45px;
-            height: 45px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             z-index: 100;
-            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -154,7 +151,7 @@
     <audio id="bgMusic" loop src="backsound.mp3"></audio>
     <div class="music-toggle" onclick="toggleMusic()">🎵</div>
 
-    <div class="container">
+    <div class="container" id="main-container">
         <div id="content-box">
             <h1 id="title">Halo Ayang...</h1>
             
@@ -174,7 +171,8 @@
         </div>
 
         <div id="form-area">
-            <form action="https://formspree.io/f/YOUR_ID_HERE" method="POST" style="display: flex; flex-direction: column; gap: 15px;">
+            <div id="celebrate-text"></div>
+            <form action="https://formspree.io/f/YOUR_ID_HERE" method="POST" style="display: flex; flex-direction: column; gap: 10px;">
                 <textarea name="pesan_lia" rows="4" placeholder="Tulis jawaban atau pesanmu buat aku di sini ya..." required></textarea>
                 <button type="submit" class="btn-main">Kirim ke Ayang Ridwan 💌</button>
             </form>
@@ -184,18 +182,18 @@
     <script>
         const slides = [
             {
-                title: "Liana Sayang...",
-                text: "Ingat gak awal kita ketemu di Sweet Dance? Makasih ya sudah menemani aku dari jaman mabar bareng, di saat aku drop karna masa lalu aku, sampai aku sibuk ngoding kayak sekarang.",
+                title: "Liana Sayang🫶🏻...",
+                text: "Ingat gak awal kita ketemu di Sweet Dance? Makasih ya sudah menemani aku dari jaman mabar bareng, di saat aku drop karna masa lalu aku, sampai aku sibuk ngoding dan joki kayak sekarang🥺.",
                 type: "img", src: "lia.png" 
             },
             {
-                title: "Tetap Semangat Ya!",
+                title: "Tetap Semangat Ya!🫰🏻",
                 text: "Aku tahu kamu capek kerja. Kalau lagi capek, kamu boleh menjadi diri kamu sendiri, kamu boleh menunjukan sisi lemah kamu, jangan terus berusaha menjadi kuat. Kamu boleh menjadikan aku rumah untuk kamu pulang, saat kamu sedang merasa lelah akan dunia ini, ingat ada aku yang selalu dukung kamu.",
                 type: "vid", src: "lia_1.mp4"
             },
             {
                 title: "Ingat Janjiku...",
-                text: "Aku mau jadi orang yang selalu jagain kamu. Biar kamu nggak perlu takut lagi sama hal-hal kayak ular di kebun atau masalah lainnya di sana.",
+                text: "Aku mau jadi orang yang selalu jagain kamu. Biar kamu nggak perlu takut lagi sama hal-hal kayak ular di kebun atau masalah lainnya di sana😘.",
                 type: "vid", src: "lia_2.mp4"
             },
             {
@@ -204,7 +202,7 @@
                 type: "vid", src: "lia_3.mp4"
             },
             {
-                title: "Liana...",
+                title: "Liana🤍...",
                 text: "Lia, everything feels better when I'm with you, and I don't want that to change. I want to take this seriously. would you give me the chance to be your boyfriend? dan tetap ada di samping aku untuk waktu yang lama?",
                 type: "img", src: "sayang.png" 
             }
@@ -227,7 +225,6 @@
 
         innerVid.addEventListener('play', () => { music.volume = 0.2; });
         innerVid.addEventListener('pause', () => { music.volume = 1.0; });
-        innerVid.addEventListener('ended', () => { music.volume = 1.0; });
 
         function startJourney() {
             const elem = document.documentElement;
@@ -243,7 +240,6 @@
             const fadeIn = setInterval(() => {
                 if (vol < 1) {
                     vol += 0.05;
-                    if (vol > 1) vol = 1;
                     music.volume = vol;
                 } else { clearInterval(fadeIn); }
             }, 100);
@@ -289,15 +285,15 @@
         function showFinalChoice() {
             btnArea.innerHTML = `
                 <button class="btn-main" id="btn-yes" onclick="celebrate()">MAU! ❤️</button>
-                <button class="btn-alt" id="btn-no" onmouseover="dodge()">Enggak</button>
+                <button class="btn-alt" id="btn-no" onmouseover="dodge()" ontouchstart="dodge()">Enggak</button>
             `;
         }
 
+        // FUNGSI LARI YANG LEBIH LIAR
         function dodge() {
             const btnNo = document.getElementById('btn-no');
-            // Logic lari lebih responsif
-            const maxX = window.innerWidth - btnNo.offsetWidth - 20;
-            const maxY = window.innerHeight - btnNo.offsetHeight - 20;
+            const maxX = window.innerWidth - btnNo.offsetWidth - 30;
+            const maxY = window.innerHeight - btnNo.offsetHeight - 30;
             
             btnNo.style.position = 'fixed';
             btnNo.style.left = Math.random() * maxX + 'px';
@@ -306,29 +302,27 @@
         }
 
         function celebrate() {
-            music.volume = 1.0;
-            innerVid.pause();
-            
-            // Sembunyiin konten lama dan tombol
-            document.getElementById('content-box').style.display = "none";
-            
-            // Tampilkan kotak isi pesan
-            document.getElementById('form-area').style.display = "flex";
-            
-            // Tambah greeting baru
-            const greet = document.createElement('div');
-            greet.innerHTML = `<h1 style="font-size:3rem">YEYYY! 🥳❤️</h1><p style="margin:15px 0">Makasih ya Lia! Aku janji bakal kasih yang terbaik buat kamu. I love you!</p><p style="font-size:2.5rem">💑🌹✨</p>`;
-            greet.style.textAlign = "center";
-            document.getElementById('main-container').prepend(greet);
-
-            // Party Confetti
-            const duration = 10 * 1000;
+            // 1. CONFETTI DULUAN
+            const duration = 8 * 1000;
             const end = Date.now() + duration;
             (function frame() {
                 confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 } });
                 confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 } });
                 if (Date.now() < end) requestAnimationFrame(frame);
             }());
+
+            // 2. HIDE KONTEN LAMA
+            document.getElementById('content-box').style.display = "none";
+            
+            // 3. TAMPILKAN TEXT CELEBRATION
+            document.getElementById('celebrate-text').innerHTML = `
+                <h1 style="font-size:2.8rem; margin-bottom:10px;">YEYYY! 🥳❤️</h1>
+                <p style="margin-bottom:20px;">Makasih ya Lia! Aku janji bakal kasih yang terbaik buat kamu. I love you! 💑🌹✨</p>
+            `;
+
+            // 4. MUNCULIN FORM ISI PESAN
+            document.getElementById('form-area').style.display = "flex";
+            music.volume = 1.0;
         }
     </script>
 </body>
