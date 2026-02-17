@@ -14,6 +14,7 @@
             --text: #ffffff;
         }
 
+        /* RESET & SCROLL FIX */
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
 
         body {
@@ -28,15 +29,17 @@
             padding: 40px 0;
         }
 
+        /* Static Background Image - CEK NAMA FILE DISINI */
         #bg-static {
             position: fixed;
             inset: 0;
-            background: url('sayang.png') center/cover no-repeat; /* BG AWAL DIGANTI JADI FOTO TERAKHIR */
+            background: url('sayang.png') center/cover no-repeat; 
             z-index: -1;
             filter: brightness(0.6) blur(5px);
             transition: 1s ease;
         }
 
+        /* UI Container */
         .container {
             position: relative;
             z-index: 10;
@@ -63,6 +66,7 @@
             text-shadow: 0 0 15px rgba(255, 179, 193, 0.5);
         }
 
+        /* Multimedia Display */
         .video-wrapper, .img-wrapper {
             width: 100%;
             border-radius: 15px;
@@ -106,6 +110,7 @@
         .btn-main { background: var(--primary); color: white; box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4); }
         .btn-alt { background: white; color: var(--primary); }
 
+        /* Formspree Section */
         #form-area {
             display: none;
             flex-direction: column;
@@ -182,7 +187,7 @@
             {
                 title: "Liana Sayang...",
                 text: "Ingat gak awal kita ketemu di Sweet Dance? Makasih ya sudah menemani aku dari jaman mabar bareng, di saat aku drop karna masa lalu aku, sampai aku sibuk ngoding kayak sekarang.",
-                type: "img", src: "lia.png" /* BG.PNG GANTI JADI LIA.PNG */
+                type: "img", src: "lia.png" 
             },
             {
                 title: "Tetap Semangat Ya!",
@@ -201,8 +206,8 @@
             },
             {
                 title: "Liana...",
-                text: "Lia, everything feels better when I'm with you, and I don't want that to change. I want to take this seriously. Would you give me the chance to be your boyfriend? Dan tetap ada di samping aku untuk waktu yang lama?",
-                type: "img", src: "sayang.png" /* LAST.PNG GANTI JADI SAYANG.PNG */
+                text: "Lia, everything feels better when I'm with you, and I don't want that to change. I want to take this seriously. would you give me the chance to be your boyfriend? dan tetap ada di samping aku untuk waktu yang lama?",
+                type: "img", src: "sayang.png" 
             }
         ];
 
